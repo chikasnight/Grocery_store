@@ -20,7 +20,7 @@ class GroceryResource extends JsonResource
             'name'=> $this->name,
             'price'=> $this->price,
             'category'=> $this->category,
-            'image'=> $this->images,
+            'image'=> $this->image,
             'create_dates'=>[
                 'created_at_human'=>$this->created_at->diffForHumans(),
                 'created_at' =>$this->created_at, 

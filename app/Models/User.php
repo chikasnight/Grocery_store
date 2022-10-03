@@ -46,4 +46,7 @@ class User extends Authenticatable
     public function grocery(){
         return $this->hasMany(Grocery::class);
     }
+    public function gallery(){
+        return $this->hasMany(Gallery::class);
+    }
 }

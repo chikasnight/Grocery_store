@@ -32,8 +32,16 @@ class GroceryController extends Controller
         // move image to temp location (tmp disk)
         $tmp = $image->storeAs('uploads/original', $filename, 'tmp');
  
- 
-        //create a blog post
+        $user= auth('sanctum')->user();
+        if( $user->id !== 1){
+            return response()->json([
+                'success'=> false,
+                'message'=>'This User is not Authorized',
+                
+            ]);
+
+        }
+        //create a grocery
         $newGrocery = Grocery::create([
             'user_id'=>auth()->id(),
             'name'=> $request->name,
@@ -53,7 +61,7 @@ class GroceryController extends Controller
         return response()->json([
             'success'=> true,
             'message'=>'successfully created a Grocery',
-            'data' =>$newGrocery
+            'data' =>new GroceryResource($newGrocery)
         ]);
     }
     public function getGrocery(Request $request, $groceryId){
